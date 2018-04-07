@@ -3,8 +3,15 @@ function HelloWorldPlugin(options) {
 }
 
 HelloWorldPlugin.prototype.apply = function(compiler) {
-  compiler.plugin('done', function() {
-    console.log('Hello World from webpack plugin!!!!'); 
+  // Setup callback for accessing a compilation:
+  compiler.plugin("compilation", function(compilation) {
+    
+    // Now setup callbacks for accessing compilation steps:
+    compilation.plugin("optimize", function() {
+      console.log("Assets are being optimized from webpack plugin.");
+    });
+
+    console.log(compilation)
   });
 };
 
